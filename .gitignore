@@ -1,0 +1,7 @@
+.gitconfig
+.gitconfig*
+smb-secrets*
+smb-secrets
+samba/*
+samba
+.secrets.yaml
