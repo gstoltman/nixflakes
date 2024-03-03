@@ -33,5 +33,6 @@
     EDITOR="nvim";
   };
 
-  xdg.configFile."awesome/rc.lua".source = ../dotfiles/rc.lua; 
+  xdg.configFile."qtile/config.py".source = ../dotfiles/qtile/config.py; 
+
 }
