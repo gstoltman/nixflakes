@@ -14,17 +14,36 @@
    hardware.url = "github:nixos/nixos-hardware";
  };
 
- outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+ outputs = { self, nixpkgs, home-manager, ... }@inputs: 
    # NixOS configuration entrypoint
    # Available through 'nixos-rebuild --flake .#your-hostname'
+   let
+     inherit (self) outputs;
+     lib = nixpkgs.lib // home-manager.lib;
+     systems = [ "x86_64-linux" "aarch64-linux" ];
+     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+     pkgsFor = lib.genAttrs systems (system: import nixpkgs {
+       inherit system;
+       config.allowUnfree = true;
+     });
+     in
+     {
+       inherit lib;
 
    nixosConfigurations = {
      # replace below with hostname
-     gram = nixpkgs.lib.nixosSystem {
-       specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+     void = lib.nixosSystem {
+       specialArgs = { inherit inputs outputs; }; # Pass flake inputs to our config
        # > Our main nixos configuration file <
        modules = [ 
-         ./nixos/configuration.nix
+         ./nixos/void/configuration.nix
+       ];
+     };
+     gram = lib.nixosSystem {
+       specialArgs = { inherit inputs outputs; }; # Pass flake inputs to our config
+       # > Our main nixos configuration file <
+       modules = [ 
+         ./nixos/gram/configuration.nix
        ];
      };
    };
@@ -33,9 +52,17 @@
    # Available through 'home-manager --flake .#your-username@your-hostname'
    homeConfigurations = {
      # replace with your username@hostname
-     "grant@gram" = home-manager.lib.homeManagerConfiguration {
+     "grant@void" = lib.homeManagerConfiguration {
        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-       extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+       extraSpecialArgs = { inherit inputs outputs; }; # Pass flake inputs to our config
+       # > Our main home-manager configuration file <
+       modules = [ 
+           ./home-manager/home.nix 
+           ];
+     };
+     "grant@gram" = lib.homeManagerConfiguration {
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = { inherit inputs outputs; }; # Pass flake inputs to our config
        # > Our main home-manager configuration file <
        modules = [ 
            ./home-manager/home.nix 
