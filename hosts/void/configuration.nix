@@ -1,21 +1,28 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.auto-optimise-store = true;
+  
+  # Garbage collector
+  #nix.gc = {
+  #  automatic = true;
+  #  dates = "weekly";
+  #  options = "--delete-older-than 60d";
+  #};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
 
-  networking.hostName = "void"; # Define your hostname.
+  networking.hostName = "void";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -57,9 +64,6 @@
     xkbVariant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -77,40 +81,46 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.grant = {
     isNormalUser = true;
     description = "grant";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      alacritty
-      firefox
-    ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
+  # List packages installed in system profile.
+  environment.systemPackages = with pkgs; [
+    alacritty
+    btop
+    curl
+    firefox
+    git
+    home-manager
+    neovim
+    wget
+    xclip
+  ];
+
+  environment.sessionVariables = rec {
+    EDITOR = "nvim";
+
+    NIXOS_CONFIG_PROFILE = "void";
+
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_BIN_HOME = "$HOME/.local/bin";
+    PATH = [ "${XDG_BIN_HOME}" ];
+  };
 
   programs = {
+    discord.enable = true;
     steam.enable = true;
   };
-  # Enable Flakes
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    '';
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-   btop
-   git
-   neovim
-   wget
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
