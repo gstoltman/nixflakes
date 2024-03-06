@@ -118,7 +118,6 @@
   };
 
   programs = {
-    discord.enable = true;
     steam.enable = true;
   };
 
