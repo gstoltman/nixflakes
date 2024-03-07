@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -10,11 +6,16 @@
       ./hardware-configuration.nix
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.auto-optimise-store = true;
+ 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-7a6506cd-e9e6-4d21-bb2e-90a25c527df8".device = "/dev/disk/by-uuid/7a6506cd-e9e6-4d21-bb2e-90a25c527df8";
+  
   networking.hostName = "gram"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -49,14 +50,14 @@
     layout = "us";
     xkbVariant = "";
     desktopManager = {
-     # plasma5.enable = true;
+      plasma5.enable = true;
     };
     displayManager = {
       sddm.enable = true;
     };
     windowManager = {
      # awesome.enable = true;
-      qtile.enable = true;
+     # qtile.enable = true;
     };
     libinput = {
       enable = true;
@@ -96,20 +97,31 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
-  # Enable Flakes
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    '';
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+# List packages installed in system profile.
   environment.systemPackages = with pkgs; [
+    alacritty
     btop
+    curl
+    firefox
     git
+    home-manager
     neovim
     wget
+    xclip
   ];
+
+  environment.sessionVariables = rec {
+    EDITOR = "nvim";
+
+    NIXOS_CONFIG_PROFILE = "gram";
+
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_BIN_HOME = "$HOME/.local/bin";
+    PATH = [ "${XDG_BIN_HOME}" ];
+  };
 
   # Fix for CPU Overheat on Gram
   boot.kernelPackages = pkgs.linuxPackages_latest;
