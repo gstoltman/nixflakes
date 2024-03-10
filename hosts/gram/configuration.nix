@@ -88,10 +88,6 @@
     isNormalUser = true;
     description = "grant";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      alacritty
-      firefox
-    ];
   };
 
   # Allow unfree packages
@@ -109,7 +105,7 @@
     wget
     xclip
   ];
-
+  
   environment.sessionVariables = rec {
     EDITOR = "nvim";
 
