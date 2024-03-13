@@ -2,18 +2,6 @@
   <a href="https://github.com/gstoltman/nixflakes">
     <img src="assets/nix-snowflake.svg" alt="Logo" width="80" height="80">
   </a>
-
-  <h1 align="center">NixOS</h1>
-
-  <p align="center">
-    My NixOS Config deployed as a flake.
-    <br />
-    <a href="https://nixos.org/">Homepage</a>
-    ·
-    <a href="https://discourse.nixos.org/">Forums</a>
-    ·
-    <a href="https://search.nixos.org/packages">Nixpkgs</a>
-  </p>
 </div>
 
 ## Usage
@@ -35,12 +23,6 @@ needed.
 To rebuild nixos, run the command 
 ```sudo nixos-rebuild switch --flake /path/to/flake/#flake_profile```
 where `flake_profile` is whatever gets set in your flake.nix.  
-I define the following alias for convenience in my [home manager](https://github.com/Ajlow2000/home-manager):
-```
-home.shellAliases = {
-    nrs = "sudo nixos-rebuild switch --flake $XDG_CONFIG_HOME/nixos/#$NIXOS_CONFIG_PROFILE";
-}
-```
 
 One advantage of nixos as a flake is pinned dependencies for reproducibility (flake.lock).
 In practice, this means the nix channel I follow gets pinned and
