@@ -2,6 +2,8 @@
   <a href="https://github.com/gstoltman/nixflakes">
     <img src="assets/nix-snowflake.svg" alt="Logo" width="80" height="80">
   </a>
+
+  <h1 align="center">System Configuration with NixOS</h1>
 </div>
 
 ### Installation
