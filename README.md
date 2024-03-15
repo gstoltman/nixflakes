@@ -4,9 +4,8 @@
   </a>
 </div>
 
-## Usage
-
 ### Installation
+
 Official installation instructions can be found in the 
 [NixOS Wiki](https://nixos.wiki/wiki/NixOS_Installation_Guide).
 
