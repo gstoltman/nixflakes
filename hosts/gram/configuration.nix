@@ -62,12 +62,18 @@
       sddm.enable = true;
     };
     windowManager = {
-     # awesome.enable = true;
-     # qtile.enable = true;
+     # i3 = {
+     #  enable = true;
+     #  extraPackages = with pkgs; [
+     #    dmenu
+     #    i3status
+     #    i3lock
+     #    i3blocks
+     #  ];
+     # };
     };
     libinput = {
       enable = true;
-      mouse.naturalScrolling = true;
       touchpad.naturalScrolling = true;
     };
   };
