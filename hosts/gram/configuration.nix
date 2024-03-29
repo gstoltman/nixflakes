@@ -108,7 +108,6 @@
     firefox
     git
     home-manager
-    neovim
     wget
     xclip
   ];
