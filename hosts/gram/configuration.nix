@@ -59,13 +59,13 @@
       plasma5.enable = true;
     };
     displayManager = {
-      sddm.enable = true;
+      lightdm.enable = true;
     };
     windowManager = {
-      #i3 = {
-      #  enable = true;
-      #  package = pkgs.i3-gaps;
-      #};
+    #  i3 = {
+    #    enable = true;
+    #    package = pkgs.i3-gaps;
+    #  };
     };
     libinput = {
       enable = true;
@@ -108,6 +108,7 @@
     firefox
     git
     home-manager
+    neovim
     wget
     xclip
   ];
