@@ -27,6 +27,12 @@
 	    ./hosts/gram/configuration.nix 
 	  ];
       };
+      surface = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit system; };
+          modules = [
+            ./hosts/surface/configuration.nix
+          ];
+      };
     };
   };
 }
