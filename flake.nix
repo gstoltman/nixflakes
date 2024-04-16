@@ -17,21 +17,21 @@
     nixosConfigurations = {
       void = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; };
-	  modules = [ 
-	    ./hosts/void/configuration.nix 
-	  ];
+	      modules = [ 
+	        ./hosts/void/configuration.nix 
+	      ];
       };
       gram = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; };
-	  modules = [ 
-	    ./hosts/gram/configuration.nix 
-	  ];
+	      modules = [ 
+	        ./hosts/gram/configuration.nix 
+	      ];
       };
       surface = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; };
-          modules = [
-            ./hosts/surface/configuration.nix
-          ];
+        modules = [
+          ./hosts/surface/configuration.nix
+        ];
       };
     };
   };
