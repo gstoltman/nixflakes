@@ -1,0 +1,17 @@
+# Docs! https://www.freedesktop.org/software/systemd/man/udev.html
+
+# Gamepad emulation for remote streaming
+# see https://steamcommunity.com/app/221410/discussions/0/523897277912430760/
+# and https://www.kernel.org/doc/html/v5.4/input/uinput.html
+KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess"
+
+# Nintendo Switch Pro controller (USB hidraw)
+KERNEL=="hidraw*", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="2009", TAG+="uaccess"
+# Nintendo Switch Pro controller (bluetooth hidraw)
+KERNEL=="hidraw*", KERNELS=="*057E:2009*", TAG+="uaccess"
+# Switch Joy-con (L) (Bluetooth)
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:057E:2006.*", TAG+="uaccess"
+# Switch Joy-con (R) (Bluetooth)
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:057E:2007.*", TAG+="uaccess"
+# Switch Joy-con charging grip (USB only)
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="200e", TAG+="uaccess"

@@ -4,7 +4,10 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../imports/default.nix
     ];
+
+  nixpkgs.overlays = [ (import ../../overlays/default.nix) ];
 
   hardware.bluetooth = {
     enable = true;
