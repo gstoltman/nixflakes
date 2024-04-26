@@ -27,6 +27,12 @@
 	        ./hosts/gram/configuration.nix 
 	      ];
       };
+      gramwm = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit system; };
+	      modules = [ 
+	        ./hosts/gram/configurationwm.nix 
+	      ];
+      };
       surface = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; };
         modules = [
