@@ -74,6 +74,18 @@
     };
   };
 
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    gwenview
+    khelpcenter
+    konsole
+    kwallet
+    kwallet-pam
+    kwalletmanager
+    plasma-browser-integration
+    spectacle
+  ];
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
