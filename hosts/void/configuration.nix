@@ -65,13 +65,17 @@
     displayManager = {
       lightdm.enable = true;
     };
-    windowManager = {
-    #  i3 = {
-    #    enable = true;
-    #    package = pkgs.i3-gaps;
-    #  };
-    };
   };
+
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    gwenview
+    khelpcenter
+    konsole
+    kwallet
+    kwallet-pam
+    plasma-browser-integration
+  ];
 
   # Enable sound with pipewire.
   sound.enable = true;

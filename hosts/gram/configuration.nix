@@ -62,12 +62,6 @@
     displayManager = {
       lightdm.enable = true;
     };
-    windowManager = {
-    #  i3 = {
-    #    enable = true;
-    #    package = pkgs.i3-gaps;
-    #  };
-    };
     # Touchpad
     libinput = {
       enable = true;
@@ -82,9 +76,7 @@
     konsole
     kwallet
     kwallet-pam
-    kwalletmanager
     plasma-browser-integration
-    spectacle
   ];
 
   # Enable sound with pipewire.
