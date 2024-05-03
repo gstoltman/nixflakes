@@ -60,7 +60,7 @@
       plasma5.enable = true;
     };
     displayManager = {
-      lightdm.enable = true;
+      sddm.enable = true;
     };
     # Touchpad
     libinput = {
