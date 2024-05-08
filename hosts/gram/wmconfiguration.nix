@@ -58,21 +58,18 @@
 #    desktopManager = {
 #      plasma5.enable = true;
 #    };
-    displayManager = {
-      lightdm.enable = true;
-    };
-    windowManager = {
-      i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-      };
-    };
+    #displayManager.autoLogin = {
+    #  enable = true;
+    #  user = "${username}";
+    #};
     # Touchpad
 #    libinput = {
 #      enable = true;
 #      touchpad.naturalScrolling = true;
 #    };
   };
+  
+  programs.dconf.enable = true; 
 
   # Enable sound with pipewire.
   sound.enable = true;
