@@ -57,13 +57,12 @@
   services.xserver = {
     enable = true;
     videoDrivers = [ "amdgpu" ];
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
     desktopManager = {
       plasma5.enable = true;
     };
     displayManager = {
-      lightdm.enable = true;
+      sddm.enable = true;
     };
   };
 
