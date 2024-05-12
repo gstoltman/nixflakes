@@ -52,20 +52,19 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    desktopManager = {
-      plasma5.enable = true;
-    };
-    displayManager = {
-      sddm.enable = true;
-    };
-    # Touchpad
-    libinput = {
+  services = {
+    xserver = {
       enable = true;
-      touchpad.naturalScrolling = true;
+      xkb.layout = "us";
+      desktopManager = {
+        plasma5.enable = true;
+      };
     };
+
+    displayManager.sddm.enable = true;
+
+    # touchpad
+    libinput.touchpad.naturalScrolling = true;
   };
 
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
@@ -137,7 +136,7 @@
       CPU_SCALING_GOVERNOR_ON_AC=schedutil
       CPU_SCALING_GOVERNOR_ON_BAT=schedutil
       CPU_SCALING_MIN_FREQ_ON_AC=400000
-      CPU_SCALING_MAX_FREQ_ON_AC=3500000
+      CPU_SCALING_MAX_FREQ_ON_AC=2300000
       CPU_SCALING_MIN_FREQ_ON_BAT=400000
       CPU_SCALING_MAX_FREQ_ON_BAT=2300000
       # Runtime Power Management for PCI(e) bus devices: on=disable, auto=enable.

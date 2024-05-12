@@ -54,17 +54,17 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-    layout = "us";
-    xkbVariant = "";
-    desktopManager = {
-      plasma5.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+      xkb.layout = "us";
+      desktopManager = {
+        plasma5.enable = true;
+      };
     };
-    displayManager = {
-      lightdm.enable = true;
-    };
+
+    displayManager.sddm.enable = true;
   };
 
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [

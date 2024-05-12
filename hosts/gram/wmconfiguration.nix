@@ -55,13 +55,21 @@
     enable = true;
     layout = "us";
     xkbVariant = "";
-#    desktopManager = {
-#      plasma5.enable = true;
-#    };
-    #displayManager.autoLogin = {
-    #  enable = true;
-    #  user = "${username}";
-    #};
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
+    displayManager = {
+      defaultSession = "xfce";
+    #  autoLogin = {
+    #    enable = true;
+    #    user = "${username}";
+    #  };
+    };
     # Touchpad
 #    libinput = {
 #      enable = true;
