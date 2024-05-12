@@ -54,7 +54,6 @@
   };
 
   # Enable the X11 windowing system.
-<<<<<<< HEAD
   services = {
     xserver = {
       enable = true;
