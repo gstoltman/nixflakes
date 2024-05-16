@@ -105,6 +105,7 @@
     curl
     firefox
     git
+    go
     home-manager
     neovim
     wget
@@ -121,7 +122,8 @@
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_BIN_HOME = "$HOME/.local/bin";
-    PATH = [ "${XDG_BIN_HOME}" ];
+    GOPATH = "$HOME/go";
+    PATH = [ "${XDG_BIN_HOME}" "${GOPATH}" ];
   };
 
   # Fix for CPU Overheat on Gram
