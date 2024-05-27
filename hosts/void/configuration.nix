@@ -105,6 +105,7 @@
     curl
     firefox
     git
+    go
     home-manager
     neovim
     wget
