@@ -57,7 +57,7 @@
       enable = true;
       xkb.layout = "us";
       desktopManager = {
-        plasma5.enable = true;
+        plasma6.enable = true;
       };
     };
 
@@ -67,7 +67,7 @@
     libinput.touchpad.naturalScrolling = true;
   };
 
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
     gwenview
     khelpcenter
