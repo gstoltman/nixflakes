@@ -66,7 +66,7 @@
     displayManager.sddm.enable = true;
   };
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+  environment.plasma6.excludePackages = with pkgs.libsForQt5; [
     elisa
     gwenview
     khelpcenter
