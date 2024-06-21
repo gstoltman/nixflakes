@@ -55,11 +55,12 @@
 
   # Enable the X11 windowing system.
   services = {
-    desktopManager.plasma6.enable = true;
+#    desktopManager.plasma6.enable = true;
     xserver = {
       enable = true;
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us";
+      desktopManager.plasma5.enable = true;
     };
 
     displayManager.sddm.enable = true;
