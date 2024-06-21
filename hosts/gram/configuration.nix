@@ -53,12 +53,11 @@
 
   # Enable the X11 windowing system.
   services = {
+#    desktopManager.plasma6.enable = true;
     xserver = {
       enable = true;
       xkb.layout = "us";
-      desktopManager = {
-        plasma6.enable = true;
-      };
+      desktopManager.plasma5.enable = true;
     };
 
     displayManager.sddm.enable = true;
@@ -67,7 +66,8 @@
     libinput.touchpad.naturalScrolling = true;
   };
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+# plasma6 only -  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     elisa
     gwenview
     khelpcenter
@@ -100,7 +100,6 @@
   
 # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    alacritty
     btop
     curl
     firefox
@@ -109,7 +108,6 @@
     home-manager
     neovim
     wget
-    xclip
   ];
   
   environment.sessionVariables = rec {
