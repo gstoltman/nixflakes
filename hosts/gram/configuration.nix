@@ -7,7 +7,7 @@
       ../../modules/postgres.nix
     ];
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
