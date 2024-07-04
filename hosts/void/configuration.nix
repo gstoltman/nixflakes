@@ -99,13 +99,13 @@
   
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    alacritty
     btop
     curl
     firefox
     git
     go
     home-manager
+    kitty
     neovim
     wget
     xclip
