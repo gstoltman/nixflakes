@@ -77,17 +77,6 @@
     plasma-browser-integration
   ];
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.grant = {
     isNormalUser = true;
