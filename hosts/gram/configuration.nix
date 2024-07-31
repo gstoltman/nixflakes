@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       ../../modules/postgres.nix
     ];
@@ -28,7 +28,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "gram"; # Define your hostname.
+  networking.hostName = "gram";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -95,8 +95,10 @@
     git
     go
     home-manager
+    kitty
     neovim
     wget
+    xclip
   ];
   
   environment.sessionVariables = rec {
