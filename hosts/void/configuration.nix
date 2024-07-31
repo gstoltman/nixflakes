@@ -124,9 +124,7 @@
     PATH = [ "${XDG_BIN_HOME}" ];
   };
 
-  programs = {
-    steam.enable = true;
-  };
+  programs.steam.enable = true;
 
   system.stateVersion = "23.11"; # Release version on installation, no need to change.
 
