@@ -100,10 +100,12 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     btop
+    chromium
     curl
     firefox
     git
     go
+    google-chrome
     home-manager
     kitty
     neovim
