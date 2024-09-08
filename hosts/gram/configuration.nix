@@ -97,6 +97,7 @@
     home-manager
     kitty
     neovim
+    pulseaudio
     wget
     xclip
   ];
