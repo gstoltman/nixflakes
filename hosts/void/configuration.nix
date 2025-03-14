@@ -8,7 +8,7 @@
     ];
 
   nixpkgs.overlays = [ (import ../../overlays/default.nix) ];
-
+  
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -55,18 +55,18 @@
 
   # Enable the X11 windowing system.
   services = {
-#    desktopManager.plasma6.enable = true;
+    desktopManager.plasma6.enable = true;
     xserver = {
       enable = true;
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us";
-      desktopManager.plasma5.enable = true;
+      # desktopManager.plasma5.enable = true;
     };
 
     displayManager.sddm.enable = true;
   };
 
-  environment.plasma6.excludePackages = with pkgs.libsForQt5; [
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
     gwenview
     khelpcenter
@@ -76,9 +76,13 @@
     plasma-browser-integration
   ];
 
+  # Enable graphics acceleration
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   # Enable sound with pipewire.
-  # sound.enable = true;  remove this?
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
