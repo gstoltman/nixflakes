@@ -21,6 +21,12 @@
 	        ./hosts/void/configuration.nix 
 	      ];
       };
+      void-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit system; };
+	      modules = [ 
+	        ./hosts/void-vm/configuration.nix 
+	      ];
+      };
       gram = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; };
 	      modules = [ 
