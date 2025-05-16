@@ -60,7 +60,6 @@
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us";
     };
-
     displayManager.sddm.enable = true;
   };
 
@@ -95,15 +94,9 @@
       grant = {
         isNormalUser = true;
         description = "grant";
-        extraGroups = [ "networkmanager" "wheel" ];
-      };
-      nixosvmtest = {
-        isSystemUser = true;
-        initialPassword = "test";
-        group = "nixosvmtest";
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
       };
     };
-    groups.nixosvmtest = {};
   };
 
   # Allow unfree packages
@@ -126,12 +119,10 @@
     wl-clipboard
   ];
 
-  virtualisation.vmVariant = {
-    virtualisation = {
-      memorySize = 8192;
-      cores = 4;
-    };
-  };
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["grant"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
