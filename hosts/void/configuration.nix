@@ -53,14 +53,12 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
   services = {
     desktopManager.plasma6.enable = true;
     xserver = {
       enable = true;
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us";
-      # desktopManager.plasma5.enable = true;
     };
 
     displayManager.sddm.enable = true;
@@ -92,10 +90,20 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.grant = {
-    isNormalUser = true;
-    description = "grant";
-    extraGroups = [ "networkmanager" "wheel" ];
+  users = {
+    users = {
+      grant = {
+        isNormalUser = true;
+        description = "grant";
+        extraGroups = [ "networkmanager" "wheel" ];
+      };
+      nixosvmtest = {
+        isSystemUser = true;
+        initialPassword = "test";
+        group = "nixosvmtest";
+      };
+    };
+    groups.nixosvmtest = {};
   };
 
   # Allow unfree packages
@@ -115,7 +123,15 @@
     neovim
     wget
     xclip
+    wl-clipboard
   ];
+
+  virtualisation.vmVariant = {
+    virtualisation = {
+      memorySize = 8192;
+      cores = 4;
+    };
+  };
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
