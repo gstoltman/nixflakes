@@ -4,10 +4,8 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/postgres.nix
     ];
 
-  hardware.graphics.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -51,55 +49,71 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services = {
-#    desktopManager.plasma6.enable = true;
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      desktopManager.plasma5.enable = true;
+
+  # Wayland related
+  # programs.sway.enable = true; # commented out while home-manager manages sway
+  security.polkit.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        --time \
+        --asterisks \
+        --user-menu \
+        --cmd sway
+      '';
     };
+  };
+  environment.etc."greetd/environments".text = ''
+    sway
+  '';
 
-    displayManager.sddm.enable = true;
-
-    # touchpad
-    libinput.touchpad.naturalScrolling = true;
+  # Enable graphics acceleration
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
-# plasma6 only -  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    gwenview
-    khelpcenter
-    konsole
-    kwallet
-    kwallet-pam
-    plasma-browser-integration
-  ];
+  # touchpad
+  services.libinput.touchpad.naturalScrolling = true;
+
+  # Enable sound with pipewire.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.grant = {
-    isNormalUser = true;
-    description = "grant";
-    extraGroups = [ "networkmanager" "wheel" ];
+  users = {
+    users = {
+      grant = {
+        isNormalUser = true;
+        description = "grant";
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      };
+    };
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
-# List packages installed in system profile.
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     btop
     curl
     firefox
     git
+    gh
     go
-    home-manager
-    kitty
+    ghostty
     neovim
-    pulseaudio
     wget
-    xclip
+    wl-clipboard
   ];
   
   environment.sessionVariables = rec {
@@ -112,8 +126,7 @@
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_BIN_HOME = "$HOME/.local/bin";
-    GOPATH = "$HOME/go";
-    PATH = [ "${XDG_BIN_HOME}" "${GOPATH}" ];
+    PATH = [ "${XDG_BIN_HOME}" ];
   };
 
   programs.steam.enable = true;
