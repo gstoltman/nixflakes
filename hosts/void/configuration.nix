@@ -52,26 +52,26 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+  
+  # Wayland related
+  # programs.sway.enable = true; # commented out while home-manager manages sway
+  security.polkit.enable = true;
 
-  services = {
-    desktopManager.plasma6.enable = true;
-    xserver = {
-      enable = true;
-      videoDrivers = [ "amdgpu" ];
-      xkb.layout = "us";
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        --time \
+        --asterisks \
+        --user-menu \
+        --cmd sway
+      '';
     };
-    displayManager.sddm.enable = true;
   };
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    elisa
-    gwenview
-    khelpcenter
-    konsole
-    kwallet
-    kwallet-pam
-    plasma-browser-integration
-  ];
+  environment.etc."greetd/environments".text = ''
+    sway
+  '';
 
   # Enable graphics acceleration
   hardware.graphics = {
@@ -105,20 +105,18 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     btop
-    chromium
     curl
     firefox
     git
+    gh
     go
-    google-chrome
-    home-manager
-    kitty
+    ghostty
     neovim
     wget
-    xclip
     wl-clipboard
   ];
 
+  # VM Setup
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = ["grant"];
   virtualisation.libvirtd.enable = true;

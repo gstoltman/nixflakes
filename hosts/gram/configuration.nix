@@ -49,7 +49,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-
   # Wayland related
   # programs.sway.enable = true; # commented out while home-manager manages sway
   security.polkit.enable = true;
@@ -76,8 +75,8 @@
     enable32Bit = true;
   };
 
-  # touchpad
-  services.libinput.touchpad.naturalScrolling = true;
+  # Touchpad
+  services.libinput.touchpad.naturalScrolling = false;
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
