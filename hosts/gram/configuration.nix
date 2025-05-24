@@ -69,6 +69,9 @@
     sway
   '';
 
+  # Gram unique requirement
+  programs.dconf.enable = true;
+
   # Enable graphics acceleration
   hardware.graphics = {
     enable = true;
