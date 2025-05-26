@@ -106,6 +106,7 @@
   environment.systemPackages = with pkgs; [
     btop
     curl
+    eza
     firefox
     git
     gh
@@ -114,6 +115,7 @@
     neovim
     wget
     wl-clipboard
+    zoxide
   ];
 
   # VM Setup
