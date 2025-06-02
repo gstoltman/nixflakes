@@ -40,5 +40,23 @@
         ];
       };
     };
+      
+    devShells = {
+      ${system} = {
+        default = pkgs.mkShell {
+          buildInputs = [
+            pkgs.python311
+            pkgs.python311Packages.virtualenv
+          ];
+          shellHook = ''
+            if [ ! -d .venv ]; then
+              python -m venv .venv
+            fi
+            source .venv/bin/activate
+            echo "Activated virtual environment at .venv"
+          '';
+        };
+      };
+    };
   };
 }
