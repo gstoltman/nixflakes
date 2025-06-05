@@ -26,8 +26,15 @@
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      devices = [ "nodev" ];
+    };
+    efi.canTouchEfiVariables = true;
+  };
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = "void";
@@ -94,7 +101,7 @@
       grant = {
         isNormalUser = true;
         description = "grant";
-        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+        extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" ];
       };
     };
   };
@@ -119,8 +126,14 @@
   # VM Setup
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = ["grant"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      daemon.settings.experimental = true;
+    };
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
