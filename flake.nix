@@ -45,8 +45,9 @@
       ${system} = {
         default = pkgs.mkShell {
           buildInputs = [
-            pkgs.python311
-            pkgs.python311Packages.virtualenv
+            pkgs.python313
+            pkgs.python313Packages.tkinter
+            pkgs.python313Packages.virtualenv
           ];
           shellHook = ''
             if [ ! -d .venv ]; then
