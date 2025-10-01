@@ -23,8 +23,16 @@
   };
  
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      devices = [ "nodev" ];
+    };
+    efi.canTouchEfiVariables = true;
+  };
+
 
   networking.hostName = "gram";
 
@@ -50,7 +58,6 @@
   };
 
   # Wayland related
-  # programs.sway.enable = true; # commented out while home-manager manages sway
   security.polkit.enable = true;
 
   services.greetd = {
@@ -70,7 +77,8 @@
   '';
 
   # Gram unique requirement
-  programs.dconf.enable = true;
+  #### DISABLING THIS FOR TESTING
+  # programs.dconf.enable = true;
 
   # Enable graphics acceleration
   hardware.graphics = {
@@ -79,7 +87,7 @@
   };
 
   # Touchpad
-  services.libinput.touchpad.naturalScrolling = false;
+  services.libinput.touchpad.naturalScrolling = true;
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
@@ -133,6 +141,7 @@
 
   programs.steam.enable = true;
 
+  # Fix for specific Gram overheating
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;

@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      # Currently exclusive for handling Switch Gamepad
       ../imports/default.nix
     ];
 
@@ -35,6 +36,7 @@
     };
     efi.canTouchEfiVariables = true;
   };
+
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = "void";
@@ -61,7 +63,6 @@
   };
   
   # Wayland related
-  # programs.sway.enable = true; # commented out while home-manager manages sway
   security.polkit.enable = true;
 
   services.greetd = {
