@@ -76,10 +76,6 @@
     sway
   '';
 
-  # Gram unique requirement
-  #### DISABLING THIS FOR TESTING
-  # programs.dconf.enable = true;
-
   # Enable graphics acceleration
   hardware.graphics = {
     enable = true;
@@ -87,7 +83,7 @@
   };
 
   # Touchpad
-  services.libinput.touchpad.naturalScrolling = true;
+  services.libinput.touchpad.naturalScrolling = false;
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
