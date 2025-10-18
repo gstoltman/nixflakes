@@ -75,6 +75,9 @@
   environment.etc."greetd/environments".text = ''
     sway
   '';
+  
+  # Gram requirement
+  programs.dconf.enable = true;
 
   # Enable graphics acceleration
   hardware.graphics = {
