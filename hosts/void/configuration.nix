@@ -39,6 +39,8 @@
 
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
   networking.hostName = "void";
 
   # Enable networking
@@ -149,7 +151,18 @@
     PATH = [ "${XDG_BIN_HOME}" ];
   };
 
-  programs.steam.enable = true;
+  programs = {
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
+  };
 
   system.stateVersion = "23.11"; # Release version on installation, no need to change.
 
