@@ -151,10 +151,16 @@
     PATH = [ "${XDG_BIN_HOME}" ];
   };
 
+  # Steam
   programs = {
     gamescope = {
       enable = true;
       capSysNice = true;
+      args = [
+        "-W" "3440"
+        "-H" "1440"
+        "-r" "144"
+      ];
     };
     steam = {
       enable = true;
