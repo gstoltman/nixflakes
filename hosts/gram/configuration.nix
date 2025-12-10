@@ -52,30 +52,13 @@
     LC_MONETARY = "en_US.UTF-8";
     LC_NAME = "en_US.UTF-8";
     LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
+  #   LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
 
   # Wayland related
   security.polkit.enable = true;
-
-  #services.greetd = {
-  #  enable = true;
-  #  settings = {
-  #    default_session.command = ''
-  #      ${pkgs.greetd.tuigreet}/bin/tuigreet \
-  #      --time \
-  #      --asterisks \
-  #      --user-menu \
-  #      --cmd sway
-  #    '';
-  #  };
-  #};
-
-  #environment.etc."greetd/environments".text = ''
-  #  sway
-  #'';
 
   services = {
     desktopManager.plasma6.enable = true;
@@ -89,8 +72,15 @@
     elisa
     gwenview
     khelpcenter
+    konsole
     plasma-browser-integration
   ];
+
+  # Installs Python for offline use
+  environment.systemPackages = with pkgs; [
+    python313
+    python313Packages.virtualenv
+  ]
 
   programs.sway = {
     enable = true;

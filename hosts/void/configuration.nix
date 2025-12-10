@@ -39,8 +39,6 @@
 
   boot.initrd.kernelModules = [ "amdgpu" ];
 
-  boot.kernelPackages = pkgs.linuxPackages;
-
   networking.hostName = "void";
 
   # Enable networking
@@ -67,21 +65,26 @@
   # Wayland related
   security.polkit.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-        --time \
-        --asterisks \
-        --user-menu \
-        --cmd sway
-      '';
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
     };
   };
-  environment.etc."greetd/environments".text = ''
-    sway
-  '';
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    elisa
+    gwenview
+    khelpcenter
+    konsole
+    plasma-browser-integration
+  ];
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
   # Enable graphics acceleration
   hardware.graphics = {

@@ -34,7 +34,6 @@
         default = pkgs.mkShell {
           buildInputs = [
             pkgs.python313
-            pkgs.python313Packages.tkinter
             pkgs.python313Packages.virtualenv
           ];
           shellHook = ''
