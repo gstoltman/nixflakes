@@ -39,6 +39,8 @@
 
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
   networking.hostName = "void";
 
   # Enable networking
