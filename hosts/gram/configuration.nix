@@ -62,6 +62,7 @@
 
   services = {
     desktopManager.plasma6.enable = true;
+    desktopManager.cosmic.enable = true;
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
@@ -75,12 +76,6 @@
     konsole
     plasma-browser-integration
   ];
-
-  # Installs Python for offline use
-  environment.systemPackages = with pkgs; [
-    python313
-    python313Packages.virtualenv
-  ]
 
   programs.sway = {
     enable = true;
