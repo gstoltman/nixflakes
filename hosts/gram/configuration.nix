@@ -153,6 +153,12 @@
     settings = {
       TLP_DEFAULT_MODE = "BAT";
       TLP_PERSISTENT_DEFAULT = 1;
+
+      CPU_BOOST_ON_AC = 0;
+      CPU_BOOST_ON_BAT = 0;
+
+      CPU_MAX_FREQ_ON_AC = 2400000;
+      CPU_MAX_FREQ_ON_BAT = 2000000;
     };
   };
 
