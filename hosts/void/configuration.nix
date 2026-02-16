@@ -109,7 +109,7 @@
       grant = {
         isNormalUser = true;
         description = "grant";
-        extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" ];
+        extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" "audio" "rtkit" ];
       };
     };
   };
@@ -129,6 +129,9 @@
     neovim
     wget
     wl-clipboard
+    # Rocksmith
+    helvum
+    rtaudio
   ];
 
   # VM Setup
@@ -172,6 +175,7 @@
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
+      rocksmithPatch.enable = true;
     };
   };
 
