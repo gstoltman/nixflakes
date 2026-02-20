@@ -175,7 +175,7 @@
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
-      rocksmithPatch.enable = true;
+      # rocksmithPatch.enable = true;
     };
   };
 

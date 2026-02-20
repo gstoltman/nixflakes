@@ -4,13 +4,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixos-rocksmith = {
-      url = "github:re1n0/nixos-rocksmith";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #nixos-rocksmith = {
+    #  url = "github:re1n0/nixos-rocksmith";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
-  outputs = { self, nixpkgs, nixos-rocksmith, ... }@inputs:
+  # outputs = { self, nixpkgs, nixos-rocksmith, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -23,7 +24,7 @@
       void = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system inputs; };
 	      modules = [
-            inputs.nixos-rocksmith.nixosModules.default
+            # inputs.nixos-rocksmith.nixosModules.default
 	        ./hosts/void/configuration.nix 
 	      ];
       };
