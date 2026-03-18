@@ -130,8 +130,8 @@
     wget
     wl-clipboard
     # Rocksmith
-    helvum
-    rtaudio
+    # helvum
+    # rtaudio
   ];
 
   # VM Setup
