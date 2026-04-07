@@ -42,6 +42,11 @@
           buildInputs = [
             pkgs.python313
             pkgs.python313Packages.virtualenv
+            pkgs.python313Packages.pandas
+            pkgs.python313Packages.requests
+            pkgs.python313Packages.lxml
+            pkgs.python313Packages.streamlit
+            # pkgs.python313Packages.beautifulsoup4
           ];
           shellHook = ''
             if [ ! -d .venv ]; then
