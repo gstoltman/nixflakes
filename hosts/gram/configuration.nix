@@ -67,6 +67,7 @@
       enable = true;
       wayland.enable = true;
     };
+    flatpak.enable = true;
   };
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -126,6 +127,7 @@
     gh
     go
     ghostty
+    kitty
     neovim
     wget
     wl-clipboard
